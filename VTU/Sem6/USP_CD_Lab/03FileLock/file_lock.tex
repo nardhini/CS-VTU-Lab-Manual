@@ -1,0 +1,54 @@
+\chapter{Locking and unlocking a region}
+
+Write a C/C++ program to check whether the region is locked or not. If the region is locked, print pid of the process which has been locked. If the region is not locked, lock the region with an exclusive lock, read the last 50 bytes and unlock the region.
+
+\section{Description}
+File locking provides a very simple yet incredibly useful mechanism for coordinating file accesses.
+
+\paragraph{}
+flock - manage locks from shell scripts.
+
+\paragraph{}
+fcntl (used to manipulate the file descriptors) file commands can be used to support record locking, which permits multiple cooperating programs to prevent each other from simultaneously accessing parts of a file in error-prone ways.
+
+\paragraph{}
+fcntl() performs the operations on the open file descriptor fd.
+
+\begin{description}
+\item F\_GETLK, F\_SETLK and F\_SETLKW are used to acquire, release, and test for the existence of record locks. 
+\item F\_UNLK to remove the existing lock.
+\end{description}
+
+\section{Code}
+
+\lstinputlisting[style=source-file]{03FileLock/03_file_lock.c}
+
+\section{Output}
+
+Run
+\begin{lstlisting}[style=shell-command]
+$ ./a.out filename
+\end{lstlisting}
+For instance
+\begin{lstlisting}[style=shell-command]
+$ ./a.out 03_file_lock.c
+\end{lstlisting}
+The output should be something like
+\begin{lstlisting}[style=shell-output]
+press enter to set lock
+
+trying to get lock..
+locked
+data read from file..
+
+printf("Unlocked\n");
+close(fd);
+return 0;
+}
+
+press enter to release lock
+
+Unlocked
+\end{lstlisting}
+
+
